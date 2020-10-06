@@ -64,58 +64,58 @@ test_features.csv: Silimar to train_features, however, an accompanying "test_sal
 
 ![](images/JobType_Distribution.png)
 
-    * The count for each category is evenly distributed.
-    * The average salary increases as category progresses from Janitor to CEO.
-    * There is a clear relationship between jobType and salary.
+   * The count for each category is evenly distributed.
+   * The average salary increases as category progresses from Janitor to CEO.
+   * There is a clear relationship between jobType and salary.
 
 * **'degree'**
 
 ![](images/Degree_Distribution.png)
 
-    * Most of the job listings do not require a degree or high school diploma.
-    * The average salary increases with any type of degree.
-        * There is not much variance in salary across the different levels of degrees, only slightly.
-        * Binning into 'degree' and 'no degree' did not increase accuracy of model.
-    * There is a clear relationship between degree and salary. 
+   * Most of the job listings do not require a degree or high school diploma.
+   * The average salary increases with any type of degree.
+       * There is not much variance in salary across the different levels of degrees, only slightly.
+       * Binning into 'degree' and 'no degree' did not increase accuracy of model.
+   * There is a clear relationship between degree and salary. 
 
 * **'major'**
 
 ![](images/Major_Distribution.png)
 
-    * Most of the job listings don't specificy a required major. This could be because either the candidate's major is insignificant, or that a candidate does not have major if they do not have a degree. It looks like a combination of both reasons.
-    * When there is a required major, there tends to be a correlation with salary, with the Engineering major receiving the highest.
+   * Most of the job listings don't specificy a required major. This could be because either the candidate's major is insignificant, or that a candidate does not have major if they do not have a degree. It looks like a combination of both reasons.
+   * When there is a required major, there tends to be a correlation with salary, with the Engineering major receiving the highest.
     
 * **'industry'**
 
 ![](images/Industry_Distribution.png)
 
-    * The count for each category is evenly distributed.
-    * The average salary is lowest for jobs in education while being the highest for jobs in the oil industry.
-    * There is a clear relationship between industry and salary.
+   * The count for each category is evenly distributed.
+   * The average salary is lowest for jobs in education while being the highest for jobs in the oil industry.
+   * There is a clear relationship between industry and salary.
 
 * **'yearsExperience'**
 
 ![](images/YearsExperience_Distribution.png)
 
-    * There is an even distribution of years experience across the job listings.
-    * There is a strong positive linear relationship between years experience and salary.
-        * The more experience a candidate has, the higher the salary.
+   * There is an even distribution of years experience across the job listings.
+   * There is a strong positive linear relationship between years experience and salary.
+       * The more experience a candidate has, the higher the salary.
 
 * **'milesFromMetropolis'**
 
 ![](images/Miles_Distribution.png)
 
-    * There is an even distribution of miles from metropolis across the job listings.
-    * There is a strong negative linear relationship between miles from metropolis and salary.
-        * The further the job is from the metropolis, the lower the salary.
+   * There is an even distribution of miles from metropolis across the job listings.
+   * There is a strong negative linear relationship between miles from metropolis and salary.
+       * The further the job is from the metropolis, the lower the salary.
         
 **Correlation Matrix**
 
 ![](images/Heatmap.png)
 
-    * The heatmap confirms correlation between jobType, degree, and major. It also confirms that there is a strong positive correlation between years experience and salary, as well as a strong negative correlation between miles from metropolis and salary.
-    * There is little concern of correlation between features, as the strongest correlation is between degree and major at 0.37. 
-    * CompanyId has negligible correlation with salary, therefore it was removed from the final training set.
+   * The heatmap confirms correlation between jobType, degree, and major. It also confirms that there is a strong positive correlation between years experience and salary, as well as a strong negative correlation between miles from metropolis and salary.
+   * There is little concern of correlation between features, as the strongest correlation is between degree and major at 0.37. 
+   * CompanyId has negligible correlation with salary, therefore it was removed from the final training set.
     
 ### Run Baseline Model
 
@@ -137,27 +137,27 @@ test_features.csv: Silimar to train_features, however, an accompanying "test_sal
 
 ### Model Development
 
-*Choose most accurate model
+* Choose most accurate model
     * Initial hyperparameters were chosen manually and revised based on their performance.
     * Five-fold cross validations were performed to establish bias and variance levels.
 
-![](Model_Comparison.png)
+![](images/Model_Comparison.png)
 
-    * Xgboost was the best performing model with an MSE-Score of 356.
+   * Xgboost was the best performing model with an MSE-Score of 356.
 
-*Fine-tune Xgboost regressor
+* Fine-tune Xgboost regressor
 
-![](N_Estimators.png)
+![](images/N_Estimators.png)
 
-    * The optimal n_estimators value was 500 or greater while max_depth = 5 and learning_rate = 0.1.
+   * The optimal n_estimators value was 500 or greater while max_depth = 5 and learning_rate = 0.1.
 
-![](Max_Depth.png)
+![](images/Max_Depth.png)
 
-    * The optimal max_depth value was around 4 while n_estimators = 750 and learning_rate = 0.1 as the test_error curve begins to diverge from the train_error curve at that point.
+   * The optimal max_depth value was around 4 while n_estimators = 750 and learning_rate = 0.1 as the test_error curve begins to diverge from the train_error curve at that point.
 
-![](Learning_Rate.png)
+![](images/Learning_Rate.png)
 
-    * The optimal learning_rate value could be between 0.05 and 0.10 while max_depth=4 and n_estimators=750. It's possible that the model with learning_rate=0.05 was unable to converge, therefore early stopping was explored with this learning rate.
+   * The optimal learning_rate value could be between 0.05 and 0.10 while max_depth=4 and n_estimators=750. It's possible that the model with learning_rate=0.05 was unable to converge, therefore early stopping was explored with this learning rate.
     
 * After fitting the data and applying early stopping, the number of rounds in which the accuracy does not increase significantly is after n_estimators=1500.
     
@@ -170,9 +170,9 @@ test_features.csv: Silimar to train_features, however, an accompanying "test_sal
 
 * A feature importance graph was plotted from the results of the data being pushed through this model and the results can be seen below;
 
-![](Feature_Importance.png)
+![](images/Feature_Importance.png)
 
-    * Its clear that yearsExperience and milesFromMetropolis are the most important variables for this model, as expected from the correalation heatmap produced earlier.
+   * Its clear that yearsExperience and milesFromMetropolis are the most important variables for this model, as expected from the correalation heatmap produced earlier.
 
 ### Model Deployment
 
