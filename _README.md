@@ -172,7 +172,7 @@ test_features.csv: Silimar to train_features, however, an accompanying "test_sal
 
 ![](images/Feature_Importance.png)
 
-   * Its clear that yearsExperience and milesFromMetropolis are the most important variables for this model, as expected from the correalation heatmap produced earlier.
+> Its clear that yearsExperience and milesFromMetropolis are the most important variables for this model, as expected from the correalation heatmap produced earlier.
 
 ### Model Deployment
 
